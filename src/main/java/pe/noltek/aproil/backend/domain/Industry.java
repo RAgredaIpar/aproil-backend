@@ -19,7 +19,7 @@ public class Industry extends BaseAuditable {
     @Column(length = 64, nullable = false)
     private String slug;
 
-    @Column(length = 160, nullable = false)
+    @Column(length = 120, nullable = false)
     private String name;
 
     @Column(name = "content_md", columnDefinition = "text")
@@ -27,6 +27,16 @@ public class Industry extends BaseAuditable {
 
     @Column(name = "meta_description", length = 160)
     private String metaDescription;
+
+    /** EN **/
+    @Column(name = "name_en", length = 120)
+    private String nameEn;
+
+    @Column(name = "content_md_en", columnDefinition = "text")
+    private String contentMdEn;
+
+    @Column(name = "meta_description_en", length = 160)
+    private String metaDescriptionEn;
 
     @OneToMany(mappedBy = "industry")
     @Builder.Default

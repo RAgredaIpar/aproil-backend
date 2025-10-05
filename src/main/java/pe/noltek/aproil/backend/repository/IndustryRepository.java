@@ -3,38 +3,39 @@ package pe.noltek.aproil.backend.repository;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import pe.noltek.aproil.backend.domain.Industry;
-
 import java.util.*;
 
 public interface IndustryRepository extends JpaRepository<Industry, Long> {
 
     interface HeaderView {
-        String getName();
-        String getContentMd();
-        String getMetaDescription();
+        String getName();            String getNameEn();
+        String getContentMd();       String getContentMdEn();
+        String getMetaDescription(); String getMetaDescriptionEn();
     }
 
     interface FeaturedAppItem {
         Short getFeaturedRank();
         Long getId();
         String getSlug();
-        String getName();
+        String getName();  String getNameEn();
     }
 
     interface FeaturedProductItem {
         Short getFeaturedRank();
         Long getId();
         String getSlug();
-        String getName();
-        String getShortDescription();
-        String getPdfUrl();
+        String getName();             String getNameEn();
+        String getShortDescription(); String getShortDescriptionEn();
+        String getPdfUrl();           String getPdfUrlEn();
     }
 
     Optional<Industry> findBySlug(String slug);
     boolean existsBySlug(String slug);
 
     @Query("""
-    select i.name as name, i.contentMd as contentMd, i.metaDescription as metaDescription
+    select i.name as name, i.nameEn as nameEn,
+           i.contentMd as contentMd, i.contentMdEn as contentMdEn,
+           i.metaDescription as metaDescription, i.metaDescriptionEn as metaDescriptionEn
     from Industry i
     where i.active = true and i.slug = :slug
   """)
@@ -42,7 +43,7 @@ public interface IndustryRepository extends JpaRepository<Industry, Long> {
 
     @Query("""
     select ia.featuredRank as featuredRank,
-           a.id as id, a.slug as slug, a.name as name
+           a.id as id, a.slug as slug, a.name as name, a.nameEn as nameEn
     from IndustryApplication ia
       join ia.industry i
       join ia.application a
@@ -56,7 +57,10 @@ public interface IndustryRepository extends JpaRepository<Industry, Long> {
 
     @Query("""
     select ipf.featuredRank as featuredRank,
-           p.id as id, p.slug as slug, p.name as name, p.shortDescription as shortDescription, p.pdfUrl as pdfUrl
+           p.id as id, p.slug as slug,
+           p.name as name, p.nameEn as nameEn,
+           p.shortDescription as shortDescription, p.shortDescriptionEn as shortDescriptionEn,
+           p.pdfUrl as pdfUrl, p.pdfUrlEn as pdfUrlEn
     from IndustryProductFeature ipf
       join ipf.industry i
       join ipf.product p

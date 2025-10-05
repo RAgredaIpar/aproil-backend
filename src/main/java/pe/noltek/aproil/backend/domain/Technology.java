@@ -2,7 +2,6 @@ package pe.noltek.aproil.backend.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -27,6 +26,16 @@ public class Technology extends BaseAuditable {
 
     @Column(name = "meta_description", length = 160)
     private String metaDescription;
+
+    /** EN **/
+    @Column(name = "name_en", length = 120)
+    private String nameEn;
+
+    @Column(name = "content_md_en", columnDefinition = "text")
+    private String contentMdEn;
+
+    @Column(name = "meta_description_en", length = 160)
+    private String metaDescriptionEn;
 
     @OneToMany(mappedBy = "technology")
     @Builder.Default

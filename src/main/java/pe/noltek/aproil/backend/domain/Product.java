@@ -26,7 +26,7 @@ public class Product extends BaseAuditable {
     @Column(length = 64, nullable = false)
     private String slug;
 
-    @Column(length = 160, nullable = false)
+    @Column(length = 120, nullable = false)
     private String name;
 
     @Column(columnDefinition = "text")
@@ -35,6 +35,17 @@ public class Product extends BaseAuditable {
     /** PDF en storage externo (URL/ruta) */
     @Column(nullable = false, columnDefinition = "text")
     private String pdfUrl;
+
+    /** EN **/
+    @Column(name = "name_en", length = 120)
+    private String nameEn;
+
+    @Column(name = "short_description_en", columnDefinition = "text")
+    private String shortDescriptionEn;
+
+    /** PDF en storage externo (URL/ruta) */
+    @Column(name = "pdf_url_en", columnDefinition = "text")
+    private String pdfUrlEn;
 
     @ManyToMany(mappedBy = "products")
     @Builder.Default

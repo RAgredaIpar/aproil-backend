@@ -3,44 +3,48 @@ package pe.noltek.aproil.backend.repository;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import pe.noltek.aproil.backend.domain.Technology;
-
 import java.util.*;
 
 public interface TechnologyRepository extends JpaRepository<Technology, Long> {
 
+    // Proyección para cabecera (ES/EN)
     interface HeaderView {
-        String getName();
-        String getContentMd();
-        String getMetaDescription();
+        String getName();            String getNameEn();
+        String getContentMd();       String getContentMdEn();
+        String getMetaDescription(); String getMetaDescriptionEn();
     }
 
+    // Lista de aplicaciones para la tecnología (ES/EN)
     interface ApplicationListItem {
         Long getId();
         String getSlug();
-        String getName();
+        String getName();  String getNameEn();
     }
 
+    // Productos agrupables por aplicación (ES/EN + PDF bilingüe)
     interface ProductByAppRow {
         String getApplicationSlug();
         Long getId();
         String getSlug();
-        String getName();
-        String getShortDescription();
-        String getPdfUrl();
+        String getName();            String getNameEn();
+        String getShortDescription();String getShortDescriptionEn();
+        String getPdfUrl();          String getPdfUrlEn();
     }
 
     Optional<Technology> findBySlug(String slug);
     boolean existsBySlug(String slug);
 
     @Query("""
-    select t.name as name, t.contentMd as contentMd, t.metaDescription as metaDescription
+    select t.name as name, t.nameEn as nameEn,
+           t.contentMd as contentMd, t.contentMdEn as contentMdEn,
+           t.metaDescription as metaDescription, t.metaDescriptionEn as metaDescriptionEn
     from Technology t
     where t.active = true and t.slug = :slug
   """)
     Optional<HeaderView> headerBySlug(@Param("slug") String slug);
 
     @Query("""
-    select distinct a.id as id, a.slug as slug, a.name as name
+    select distinct a.id as id, a.slug as slug, a.name as name, a.nameEn as nameEn
     from Application a
       join a.products p
     where p.technology.slug = :techSlug
@@ -52,7 +56,10 @@ public interface TechnologyRepository extends JpaRepository<Technology, Long> {
 
     @Query("""
     select a.slug as applicationSlug,
-           p.id as id, p.slug as slug, p.name as name, p.shortDescription as shortDescription, p.pdfUrl as pdfUrl
+           p.id as id, p.slug as slug,
+           p.name as name, p.nameEn as nameEn,
+           p.shortDescription as shortDescription, p.shortDescriptionEn as shortDescriptionEn,
+           p.pdfUrl as pdfUrl, p.pdfUrlEn as pdfUrlEn
     from Application a
       join a.products p
     where p.technology.slug = :techSlug
