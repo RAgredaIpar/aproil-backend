@@ -2,6 +2,7 @@ package pe.noltek.aproil.backend.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -10,8 +11,8 @@ import java.util.Set;
         uniqueConstraints = @UniqueConstraint(name = "uk_product_slug", columnNames = "slug"),
         indexes = @Index(name = "idx_product_technology", columnList = "technology_id"))
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode(of = "id")
-public class Product {
+@EqualsAndHashCode(of = "id", callSuper = false)
+public class Product extends BaseAuditable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
