@@ -13,6 +13,24 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
         String getMetaDescription(); String getMetaDescriptionEn();
     }
 
+    interface CardItem {
+        String getSlug();
+        String getName(); String getNameEn();
+        String getImageUrl();
+        String getImageAlt(); String getImageAltEn();
+    }
+
+    @Query("""
+    select a.slug as slug,
+           a.name as name, a.nameEn as nameEn,
+           a.imageUrl as imageUrl,
+           a.imageAlt as imageAlt, a.imageAltEn as imageAltEn
+    from Application a
+    where a.active = true
+    order by a.name asc
+  """)
+    List<CardItem> listCards();
+
     interface TechnologyListItem {
         Long getId();
         String getSlug();
@@ -34,12 +52,12 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     boolean existsBySlug(String slug);
 
     @Query("""
-    select a.name as name, a.nameEn as nameEn,
-           a.contentMd as contentMd, a.contentMdEn as contentMdEn,
-           a.metaDescription as metaDescription, a.metaDescriptionEn as metaDescriptionEn
-    from Application a
-    where a.active = true and a.slug = :slug
-  """)
+              select a.name as name, a.nameEn as nameEn,
+                     a.contentMd as contentMd, a.contentMdEn as contentMdEn,
+                     a.metaDescription as metaDescription, a.metaDescriptionEn as metaDescriptionEn
+              from Application a
+              where a.active = true and a.slug = :slug
+            """)
     Optional<HeaderView> headerBySlug(@Param("slug") String slug);
 
     @Query("""
