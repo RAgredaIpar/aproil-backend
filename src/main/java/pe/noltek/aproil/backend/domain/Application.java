@@ -28,6 +28,15 @@ public class Application extends BaseAuditable {
     @Column(name = "meta_description", length = 160)
     private String metaDescription;
 
+    @Column(name = "image_url", length = 512)
+    private String imageUrl;
+
+    @Column(name = "image_alt", length = 180)
+    private String imageAlt;
+
+    @Column(name = "image_alt_en", length = 180)
+    private String imageAltEn;
+
     /** EN **/
     @Column(name = "name_en", length = 120)
     private String nameEn;
@@ -37,15 +46,6 @@ public class Application extends BaseAuditable {
 
     @Column(name = "meta_description_en", length = 160)
     private String metaDescriptionEn;
-
-    @Column(name = "image_url", length = 512)
-    private String imageUrl;
-
-    @Column(name = "image_alt", length = 180)
-    private String imageAlt;
-
-    @Column(name = "image_alt_en", length = 180)
-    private String imageAltEn;
 
     /** M:N con Product SIN entidad intermedia (Hibernate crea application_product) */
     @ManyToMany

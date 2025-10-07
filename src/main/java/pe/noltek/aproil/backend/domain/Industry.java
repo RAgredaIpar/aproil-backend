@@ -9,11 +9,16 @@ import java.util.Set;
 @Entity
 @Table(name = "industry",
         uniqueConstraints = @UniqueConstraint(name = "uk_industry_slug", columnNames = "slug"))
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(of = "id", callSuper = false)
 public class Industry extends BaseAuditable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 64, nullable = false)
@@ -28,7 +33,18 @@ public class Industry extends BaseAuditable {
     @Column(name = "meta_description", length = 160)
     private String metaDescription;
 
-    /** EN **/
+    @Column(name = "image_url", length = 512)
+    private String imageUrl;
+
+    @Column(name = "image_alt", length = 180)
+    private String imageAlt;
+
+    @Column(name = "image_alt_en", length = 180)
+    private String imageAltEn;
+
+    /**
+     * EN
+     **/
     @Column(name = "name_en", length = 120)
     private String nameEn;
 
