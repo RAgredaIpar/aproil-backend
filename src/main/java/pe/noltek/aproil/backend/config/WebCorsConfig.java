@@ -8,7 +8,7 @@ public class WebCorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/v1/**")
-                .allowedOrigins("https://aproillubricants.com", "https://www.aproillubricants.com", "http://localhost:5173")
+                .allowedOrigins("https://aproillubricants.com", "https://www.aproillubricants.com", "http://localhost:3000")
                 .allowedMethods("GET")
                 .allowedHeaders("*")
                 .allowCredentials(false)
