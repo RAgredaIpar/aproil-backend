@@ -55,6 +55,18 @@ public class Application extends BaseAuditable {
     @Column(name = "image_alt_en", length = 180)
     private String imageAltEn;
 
+    @Size(max = 512)
+    @Column(name = "banner_url", length = 512)
+    private String bannerUrl;
+
+    @Size(max = 180)
+    @Column(name = "banner_alt", length = 180)
+    private String bannerAlt;
+
+    @Size(max = 180)
+    @Column(name = "banner_alt_en", length = 180)
+    private String bannerAltEn;
+
     /**
      * EN
      **/

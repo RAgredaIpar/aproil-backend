@@ -43,6 +43,30 @@ public class Technology extends BaseAuditable {
     @Column(name = "meta_description", length = 160)
     private String metaDescription;
 
+    @Size(max = 512)
+    @Column(name = "image_url", length = 512)
+    private String imageUrl;
+
+    @Size(max = 180)
+    @Column(name = "image_alt", length = 180)
+    private String imageAlt;
+
+    @Size(max = 180)
+    @Column(name = "image_alt_en", length = 180)
+    private String imageAltEn;
+
+    @Size(max = 512)
+    @Column(name = "banner_url", length = 512)
+    private String bannerUrl;
+
+    @Size(max = 180)
+    @Column(name = "banner_alt", length = 180)
+    private String bannerAlt;
+
+    @Size(max = 180)
+    @Column(name = "banner_alt_en", length = 180)
+    private String bannerAltEn;
+
     /**
      * EN
      **/
