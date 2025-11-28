@@ -8,7 +8,8 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+
+        stage('Checkout Repository') {
             steps {
                 checkout scm
             }
@@ -39,7 +40,9 @@ pipeline {
         }
 
         stage('Terraform Apply') {
-            when { branch 'main' }
+            when {
+                branch 'main'
+            }
             steps {
                 dir('terraform') {
                     sh 'terraform apply -auto-approve tfplan'
