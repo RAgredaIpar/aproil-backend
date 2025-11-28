@@ -32,6 +32,10 @@ resource "aws_iam_role_policy_attachment" "lambda_secretsmanager" {
   role       = aws_iam_role.lambda_backend_role.name
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
 }
+resource "aws_iam_role_policy_attachment" "lambda_basic_logs" {
+  role       = aws_iam_role.lambda_backend_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
 
 # Inline policy para lectura del secret especifico
 resource "aws_iam_role_policy" "lambda_secrets_access" {
