@@ -5,6 +5,18 @@ out/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Terraform ###
+/terraform/.terraform/
+/terraform/.terraform/*
+/terraform/terraform.tfstate
+/terraform/terraform.tfstate.backup
+/terraform/*.tfstate
+/terraform/*.tfstate.*
+/terraform/*.tfvars
+
+!/terraform/terraform.tfvars.example
+!/terraform/.terraform.lock.hcl
+
 ### STS ###
 .apt_generated
 .classpath

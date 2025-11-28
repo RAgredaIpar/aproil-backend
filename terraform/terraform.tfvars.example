@@ -1,0 +1,27 @@
+aws_profile = "Proyecto"
+aws_region = "sa-east-1"
+
+project_name = "aproil"
+stage = "prod"
+
+vpc_cidr = "10.0.0.0/16"
+az_a = "sa-east-1a"
+az_b = "sa-east-1b"
+private_subnet_a1_cidr = "10.0.1.0/24"
+private_subnet_b1_cidr = "10.0.2.0/24"
+
+ecr_repo_name = "lambda-backend"
+
+lambda_function_name = "aproil-backend-lambda"
+lambda_memory = 1024
+lambda_timeout = 30
+lambda_architectures = ["x86_64"]
+# lambda_image_digest = ...
+
+db_allocated_storage = 20
+db_engine = "postgres"
+db_engine_version = "16.3"
+db_instance_class = "db.t3.micro"
+db_name = "aproil_db"
+db_username = "aproil"
+# db_password = ...
