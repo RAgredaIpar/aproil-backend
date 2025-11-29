@@ -33,8 +33,14 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                dir('terraform') {
-                    sh 'terraform plan -out=tfplan'
+                script {
+                    def dbPassword = input(
+                        id: 'DB_PASSWORD_INPUT', message: 'Enter DB password', 
+                        parameters: [password(defaultValue: '', description: 'Database password', name: 'DB_PASSWORD')]
+                    )
+                    dir('terraform') {
+                        sh "terraform plan -out=tfplan -var 'db_password=${dbPassword}'"
+                    }
                 }
             }
         }
@@ -44,8 +50,14 @@ pipeline {
                 branch 'main'
             }
             steps {
-                dir('terraform') {
-                    sh 'terraform apply -auto-approve tfplan'
+                script {
+                    def dbPassword = input(
+                        id: 'DB_PASSWORD_APPLY', message: 'Enter DB password for apply', 
+                        parameters: [password(defaultValue: '', description: 'Database password', name: 'DB_PASSWORD')]
+                    )
+                    dir('terraform') {
+                        sh "terraform apply -auto-approve -var 'db_password=${dbPassword}' tfplan"
+                    }
                 }
             }
         }
