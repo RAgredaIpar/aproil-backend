@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  jenkins:
+    image: jenkins/jenkins:jdk21
+    container_name: jenkins
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - ./jcasc:/var/jenkins_home/casc_configs:ro
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins-net
+
+  dind:
+    container_name: dind
+    image: docker:27-dind
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=
+    command: ["--host=tcp://0.0.0.0:2375"]
+    ports:
+      - "2375:2375"
+    volumes:
+      - dind-storage:/var/lib/docker
+    networks:
+      - jenkins-net
+
+networks:
+  jenkins-net:
+    driver: bridge
+
+volumes:
+  jenkins_home:
+  dind-storage:

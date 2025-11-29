@@ -1,0 +1,14 @@
+FROM openjdk:17-ea-jdk-alpine3.14
+
+RUN apk add --no-cache bash git openssh curl unzip \
+    && curl -fsSL https://releases.hashicorp.com/terraform/1.8.0/terraform_1.8.0_linux_amd64.zip -o terraform.zip \
+    && unzip terraform.zip \
+    && mv terraform /usr/local/bin/ \
+    && rm terraform.zip
+
+RUN mkdir -p /home/jenkins && chown 1000:1000 /home/jenkins
+
+USER 1000
+WORKDIR /home/jenkins
+
+CMD ["tail", "-f", "/dev/null"]

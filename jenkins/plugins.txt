@@ -1,0 +1,10 @@
+configuration-as-code:2006.v001a_2ca_6b_574
+configuration-as-code-support
+
+git
+workflow-aggregator
+credentials-binding
+ssh-agent
+
+docker-workflow
+docker-plugin
