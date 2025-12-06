@@ -108,12 +108,3 @@ variable "db_password" {
   type = string
   sensitive = true
 }
-output "landing_url" {
-  description = "URL Publica de la Landing (CloudFront)"
-  value       = "https://${aws_cloudfront_distribution.landing_dist.domain_name}"
-}
-
-output "admin_url" {
-  description = "URL Publica del Admin (CloudFront)"
-  value       = "https://${aws_cloudfront_distribution.admin_dist.domain_name}"
-}
