@@ -1,11 +1,5 @@
 pipeline {
-    agent { 
-        docker { 
-            image 'sebastiangilian/agent:latest' 
-            label 'terraform'
-            alwaysPull true 
-        }
-    }
+    agent { label 'terraform' }
 
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key')
