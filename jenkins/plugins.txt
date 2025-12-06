@@ -3,8 +3,13 @@ configuration-as-code-support
 
 git
 workflow-aggregator
+workflow-job
 credentials-binding
 ssh-agent
 
 docker-workflow
 docker-plugin
+
+job-dsl
+envinject
+cloudbees-folder

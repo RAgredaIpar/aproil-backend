@@ -44,3 +44,8 @@ build/
 
 ### VS Code ###
 .vscode/
+.env
+.scannerwork
+deploy
+node_modules
+package-lock.json
