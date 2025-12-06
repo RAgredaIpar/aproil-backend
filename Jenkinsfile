@@ -70,37 +70,30 @@ pipeline {
             steps {
                 dir('workspace_landing') {
                     echo "Iniciando despliegue de Landing Page"
-                    
                     git branch: 'main', url: 'https://github.com/SebastianG15/Landing.git'
-                    
                     sh 'npm install'
-                    
                     sh 'npm run test'
-                    
                     sh 'npm run build'
-                    
                     sh "aws s3 sync ./out s3://${env.LANDING_BUCKET} --delete --exclude 'config.js'"
                 }
             }
         }
+
         stage('Deploy Admin Frontend') {
             when { expression { return env.ADMIN_BUCKET != "" } }
             steps {
                 dir('workspace_admin') {
                     echo "Iniciando despliegue de Admin Panel..."
-                    
                     git branch: 'main', url: 'https://github.com/SebastianG15/Admin.git'
-                    
                     sh 'npm install'
-                    
                     sh 'npm run test'
-                    
                     sh 'npm run build'
-                    
                     sh "aws s3 sync ./out s3://${env.ADMIN_BUCKET} --delete --exclude 'config.js'"
                 }
             }
         }
+    } 
+    
     post {
         success {
             echo 'Despliegue Completo Exitoso. Tus webs están actualizadas.'
@@ -108,6 +101,5 @@ pipeline {
         failure {
             echo 'Algo falló en el pipeline.'
         }
-    }
     }
 }
