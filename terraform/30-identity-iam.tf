@@ -47,7 +47,22 @@ resource "aws_iam_role_policy" "lambda_secrets_access" {
       {
         Effect   = "Allow",
         Action = ["secretsmanager:GetSecretValue"],
-        Resource = aws_secretsmanager_secret.app_config.arn
+        Resource = aws_secretsmanager_secret.app_config11.arn
       }]
+  })
+}
+resource "aws_iam_role_policy" "lambda_s3_policy" {
+  name = "lambda-s3-write"
+  role = aws_iam_role.lambda_backend_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = ["s3:PutObject"],
+        Resource = "${aws_s3_bucket.aproil_files.arn}/*"
+      }
+    ]
   })
 }

@@ -38,11 +38,11 @@ output "ecr_repository_url" {
 }
 
 output "lambda_function_name" {
-  value = aws_lambda_function.aproil-backend-lambda.function_name
+  value = aws_lambda_function.lambda_db.function_name
 }
 
 output "secretsmanager_secret_arn" {
-  value = aws_secretsmanager_secret.app_config.arn
+  value = aws_secretsmanager_secret.app_config11.arn
 }
 
 output "vpce_ids" {

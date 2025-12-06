@@ -48,9 +48,9 @@ variable "ecr_repo_name" {
   default = "lambda-backend"
 }
 
-variable "lambda_function_name" {
+variable "lambda_db_writer" {
   type = string
-  default = "aproil-backend-lambda"
+  default = "writer-lambda"
 }
 
 variable "lambda_memory" {

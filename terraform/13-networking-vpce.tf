@@ -61,3 +61,11 @@ resource "aws_vpc_endpoint" "vpce_secretsmanager" {
 
   tags = { Name = "VPCE-SecretsManager" }
 }
+resource "aws_vpc_endpoint" "vpce_s3" {
+  vpc_id       = aws_vpc.VPC_Aproil.id
+  service_name = "com.amazonaws.${var.aws_region}.s3"
+  vpc_endpoint_type = "Gateway"
+  route_table_ids   = [aws_route_table.route_aproil.id]
+
+  tags = { Name = "VPCE-S3-Gateway" }
+}
