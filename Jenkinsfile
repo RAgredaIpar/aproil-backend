@@ -101,7 +101,7 @@ pipeline {
                 }
             }
         }
-        post {
+    post {
         success {
             echo 'Despliegue Completo Exitoso. Tus webs están actualizadas.'
         }
